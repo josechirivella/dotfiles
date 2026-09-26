@@ -3,6 +3,8 @@ add_to_path "/usr/local/go/bin"
 add_to_path "$GOPATH/bin"
 add_to_path "$HOME/.rbenv/bin"
 
+export RUBYOPT="--yjit"
+
 function startServices() {
   services=("mysql" "redis-server" "nginx")
   for service in "${services[@]}"; do
@@ -13,3 +15,5 @@ function startServices() {
 # pnpm
 export PNPM_HOME="/home/jchirivella/.local/share/pnpm"
 add_to_path "$PNPM_HOME"
+
+eval "$(mise activate zsh)"
