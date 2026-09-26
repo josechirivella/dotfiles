@@ -62,3 +62,16 @@ export COREPACK_ENABLE_AUTO_PIN=0
 
 # Deduplicate PATH at the end of configuration loading
 dedupe_path
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/jchirivella/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# pnpm
+export PNPM_HOME="/Users/jchirivella/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
