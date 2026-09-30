@@ -44,6 +44,11 @@ esac
 # pnpm end
 
 # LM Studio
-if [ -f "$HOME/.lmstudio" ]; then
+if [ -d "$HOME/.lmstudio" ]; then
   add_to_path "$HOME/.lmstudio/bin"
+fi
+
+# flutter
+if [ -d "$HOME/.config/flutter" ]; then
+  add_to_path "$HOME/.config/flutter/bin"
 fi
