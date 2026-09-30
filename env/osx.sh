@@ -2,7 +2,7 @@
 add_to_path "/opt/homebrew/bin"
 add_to_path "/opt/homebrew/sbin"
 add_to_path "/usr/local/sbin"
-add_to_path "/opt/homebrew/opt/postgresql@17/bin"
+add_to_path "/opt/homebrew/opt/postgresql@18/bin"
 add_to_path "/opt/homebrew/opt/openjdk/bin"
 export RUBY_YJIT_ENABLE=1
 export GOPATH="$HOME/repos/go"
