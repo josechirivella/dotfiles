@@ -33,45 +33,5 @@ fi
 DEFAULT_USER=$USER
 # neofetch
 
-# Lazy load Angular CLI autocompletion for faster startup
-ng() {
-  if ! command -v ng &>/dev/null; then
-    echo "Angular CLI not found"
-    return 1
-  fi
-
-  # Load completions on first use
-  if [[ -z "$_NG_COMPLETION_LOADED" ]]; then
-    source <(command ng completion script)
-    export _NG_COMPLETION_LOADED=1
-  fi
-
-  command ng "$@"
-}
-
-# bun - only configure if installed
-if [[ -d "$HOME/.bun" ]] || command -v bun &>/dev/null; then
-  # bun completions
-  [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-  # bun
-  export BUN_INSTALL="$HOME/.bun"
-  add_to_path "$BUN_INSTALL/bin"
-fi
-export COREPACK_ENABLE_AUTO_PIN=0
-
 # Deduplicate PATH at the end of configuration loading
 dedupe_path
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/jchirivella/.lmstudio/bin"
-# End of LM Studio CLI section
-
-
-# pnpm
-export PNPM_HOME="/Users/jchirivella/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
-esac
-# pnpm end

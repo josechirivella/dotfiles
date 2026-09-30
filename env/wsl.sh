@@ -15,5 +15,3 @@ function startServices() {
 # pnpm
 export PNPM_HOME="/home/jchirivella/.local/share/pnpm"
 add_to_path "$PNPM_HOME"
-
-eval "$(mise activate zsh)"

@@ -49,6 +49,8 @@ elif [ -d "$HOME/.asdf" ]; then
   fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
   # initialise completions with ZSH's compinit
   autoload -Uz compinit && compinit
+elif [ -d "$HOME/.local/share/mise" ]; then
+  eval "$(mise activate zsh)"
 else
   echo 'No Node Version Manager has been installed'
 fi
@@ -96,5 +98,37 @@ if [ -f $HOME'/google-cloud-sdk/path.zsh.inc' ]; then . $HOME'/google-cloud-sdk/
 # The next line enables shell command completion for gcloud.
 if [ -f $HOME'/google-cloud-sdk/completion.zsh.inc' ]; then . $HOME'/google-cloud-sdk/completion.zsh.inc'; fi
 alias changegcloud="gcloud config configurations activate"
+
+# Lazy load Angular CLI autocompletion for faster startup
+ng() {
+  if ! command -v ng &>/dev/null; then
+    echo "Angular CLI not found"
+    return 1
+  fi
+
+  # Load completions on first use
+  if [[ -z "$_NG_COMPLETION_LOADED" ]]; then
+    source <(command ng completion script)
+    export _NG_COMPLETION_LOADED=1
+  fi
+
+  command ng "$@"
+}
+
+# bun - only configure if installed
+if [[ -d "$HOME/.bun" ]] || command -v bun &>/dev/null; then
+  # bun completions
+  [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+  # bun
+  export BUN_INSTALL="$HOME/.bun"
+  add_to_path "$BUN_INSTALL/bin"
+fi
+export COREPACK_ENABLE_AUTO_PIN=0
+
+# opencode
+if [ -d "$HOME/.opencode" ]; then
+  add_to_path "$HOME/.opencode/bin"
+fi
 
 install_java
